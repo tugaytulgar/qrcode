@@ -7,26 +7,27 @@
     <title>QR Code Generator - Premium Vector Quality</title>
     <style>
         :root {
-            --bg-primary: #0f0f23;
-            --bg-secondary: #1a1a2e;
-            --bg-card: rgba(30, 30, 50, 0.8);
+            --bg-primary: #14211f;
+            --bg-secondary: #0a3d4a;
+            --bg-card: rgba(10, 61, 74, 0.8);
             --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --accent: #6366f1;
-            --accent-hover: #818cf8;
+            --text-secondary: #a0c0c8;
+            --accent: #0277BD;
+            --accent-hover: #4FC3F7;
             --success: #10b981;
             --warning: #f59e0b;
             --border: rgba(255, 255, 255, 0.1);
         }
 
         .light-mode {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #e2e8f0;
+            --bg-primary: #e5e1e6;
+            --bg-secondary: #d8d4d9;
             --bg-card: rgba(255, 255, 255, 0.9);
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             --border: rgba(0, 0, 0, 0.1);
         }
+
 
         * {
             margin: 0;
@@ -58,12 +59,48 @@
         }
 
         h1 {
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--accent), #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
         }
+
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            vertical-align: bottom;
+            animation: typewriter 8s steps(30) infinite;
+        }
+
+        @keyframes typewriter {
+            0% {
+                width: 0;
+            }
+
+            25% {
+                width: 100%;
+            }
+
+            85% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0;
+            }
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+
 
         .theme-toggle {
             background: var(--bg-card);
@@ -399,7 +436,18 @@
 <body>
     <div class="container">
         <header>
-            <h1 data-i18n="title">QR Code Generator</h1>
+            <h1>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <div class="typing-text">QR Code <span>Generator</span></div>
+            </h1>
+
+
             <div style="display: flex; gap: 10px;">
                 <button class="theme-toggle" onclick="toggleLang()" id="langBtn">EN</button>
                 <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">Dark</button>
