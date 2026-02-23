@@ -2,7 +2,6 @@
 
 Premium kalitede, yüksek çözünürlüklü ve tamamen güvenli bir QR kod oluşturma uygulaması. Hiçbir veri sunucuya gönderilmez, tüm işlemler tarayıcınızda gerçekleşir.
 
-![Preview](https://via.placeholder.com/800x450.png?text=QR+Code+Generator+Preview) *<-- Buraya kendi ekran görüntünüzü de ekleyebilirsiniz.*
 
 ## ✨ Özellikler
 
