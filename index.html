@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Premium Vector Quality</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230277BD' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7'%3E%3C/rect%3E%3Crect x='14' y='3' width='7' height='7'%3E%3C/rect%3E%3Crect x='14' y='14' width='7' height='7'%3E%3C/rect%3E%3Crect x='3' y='14' width='7' height='7'%3E%3C/rect%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --bg-primary: #14211f;
+            --bg-secondary: #0a3d4a;
+            --bg-card: rgba(10, 61, 74, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #a0c0c8;
+            --accent: #546BA0;
+            --accent-hover: #0277BD;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode {
+            --bg-primary: #e5e1e6;
+            --bg-secondary: #d8d4d9;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: rgba(0, 0, 0, 0.1);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            vertical-align: bottom;
+            animation: typewriter 8s steps(30) infinite;
+        }
+
+        @keyframes typewriter {
+            0% {
+                width: 0;
+            }
+
+            25% {
+                width: 100%;
+            }
+
+            85% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0;
+            }
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        textarea,
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        textarea:focus,
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle.active {
+            background: var(--accent);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .toggle.active::after {
+            left: 26px;
+        }
+
+        .qr-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+        }
+
+        #qrContainer {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            display: inline-block;
+        }
+
+        #qrContainer svg {
+            display: block !important;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .quiet-zone {
+            border: 3px dashed var(--warning);
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        /* Specific Hover Colors for Export Buttons */
+        #btnPng:not(:disabled):hover {
+            background: #ead6a6;
+            color: #000;
+            border-color: #ead6a6;
+        }
+
+        #btnJpeg:not(:disabled):hover {
+            background: #a3c2b0;
+            color: #000;
+            border-color: #a3c2b0;
+        }
+
+        #btnSvg:not(:disabled):hover {
+            background: #baeaa6;
+            color: #000;
+            border-color: #baeaa6;
+        }
+
+        #btnPdf:not(:disabled):hover {
+            background: #d55f48;
+            color: #fff;
+            border-color: #d55f48;
+        }
+
+        .btn-large {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .export-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .score-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .score-high {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .score-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .score-low {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .history-section {
+            margin-top: 30px;
+        }
+
+        .history-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .history-item:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .no-qr {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .bulk-info {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .app-footer {
+            text-align: center;
+            padding: 24px 16px 16px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+        .app-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .app-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <div class="typing-text">QR Code <span>Generator</span></div>
+            </h1>
+
+
+            <div style="display: flex; gap: 10px;">
+                <button class="theme-toggle" onclick="toggleLang()" id="langBtn">EN</button>
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">Dark</button>
+            </div>
+        </header>
+        <div class="tabs">
+            <div class="tab active" data-tab="single" onclick="switchTab('single')" data-i18n="tabSingle">Tek QR</div>
+            <div class="tab" data-tab="bulk" onclick="switchTab('bulk')" data-i18n="tabBulk">Toplu QR</div>
+            <div class="tab" data-tab="vcard" onclick="switchTab('vcard')" data-i18n="tabVcard">vCARD</div>
+            <div class="tab" data-tab="wifi" onclick="switchTab('wifi')" data-i18n="tabWifi">WiFi</div>
+        </div>
+        <div class="main-grid">
+            <div class="card">
+                <h2 data-i18n="settingsTitle">Ayarlar</h2>
+                <div id="singleMode">
+                    <div class="input-group">
+                        <label data-i18n="textLabel">Metin / URL</label>
+                        <textarea id="qrText" data-i18n-placeholder="textPlaceholder"
+                            placeholder="QR kodu için metin girin..."></textarea>
+                    </div>
+                </div>
+                <div id="bulkMode" class="hidden">
+                    <div class="input-group">
+                        <label data-i18n="bulkTextLabel">Toplu Metin (her satır bir QR)</label>
+                        <textarea id="bulkText" placeholder="ABC001&#10;ABC002&#10;ABC003" rows="6"></textarea>
+                        <div class="bulk-info" data-i18n="bulkInfo">Her satır ayrı bir QR kod olarak paketlenecek</div>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="formatLabel">Dosya Formatı</label>
+                        <select id="bulkFormat">
+                            <option value="png" selected>PNG (.png)</option>
+                            <option value="jpg">JPEG (.jpg)</option>
+                            <option value="svg">SVG (.svg)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="vcardMode" class="hidden">
+                    <p class="bulk-info" style="margin-bottom: 16px;" data-i18n="vcardDesc">QR okutulduğunda Android ve iOS’ta kişi ekleme ekranı açılır.</p>
+                    <div class="options-grid">
+                        <div class="input-group">
+                            <label data-i18n="vcardFirstName">Ad</label>
+                            <input type="text" id="vcardFirstName" placeholder="Ahmet">
+                        </div>
+                        <div class="input-group">
+                            <label data-i18n="vcardLastName">Soyad</label>
+                            <input type="text" id="vcardLastName" placeholder="Yılmaz">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardOrg">Şirket / Kurum</label>
+                        <input type="text" id="vcardOrg" placeholder="Şirket Adı A.Ş.">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardTitle">Ünvan</label>
+                        <input type="text" id="vcardTitle" placeholder="Pazarlama Müdürü">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardTel">Telefon</label>
+                        <input type="tel" id="vcardTel" placeholder="+90 555 123 45 67">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardEmail">E-posta</label>
+                        <input type="email" id="vcardEmail" placeholder="ahmet@firma.com">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardUrl">Web Adresi (URL)</label>
+                        <input type="url" id="vcardUrl" placeholder="https://www.firma.com">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardAddress">Adres (isteğe bağlı)</label>
+                        <input type="text" id="vcardAddress" placeholder="İl, ilçe, sokak">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="vcardNote">Not (isteğe bağlı)</label>
+                        <input type="text" id="vcardNote" placeholder="Kısa not veya slogan">
+                    </div>
+                </div>
+                <div id="wifiMode" class="hidden">
+                    <p class="bulk-info" style="margin-bottom: 16px;" data-i18n="wifiDesc">QR okutulunca cihaz WiFi ağına bağlanır (Android/iOS uyumlu).</p>
+                    <div class="input-group">
+                        <label data-i18n="wifiSsid">Ağ adı (SSID)</label>
+                        <input type="text" id="wifiSsid" placeholder="EvWiFi">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="wifiPassword">Şifre</label>
+                        <input type="password" id="wifiPassword" placeholder="••••••••">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="wifiSecurity">Güvenlik</label>
+                        <select id="wifiSecurity">
+                            <option value="WPA" data-i18n="wifiWpa">WPA/WPA2</option>
+                            <option value="WEP" data-i18n="wifiWep">WEP</option>
+                            <option value="nopass" data-i18n="wifiNone">Yok (açık ağ)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="options-grid">
+                    <div class="input-group">
+                        <label data-i18n="errorLevelLabel">Hata Düzeltme</label>
+                        <select id="errorLevel">
+                            <option value="L" data-i18n="errorL">L - Düşük (7%)</option>
+                            <option value="M" data-i18n="errorM">M - Orta (15%)</option>
+                            <option value="Q" data-i18n="errorQ">Q - İyi (25%)</option>
+                            <option value="H" data-i18n="errorH" selected>H - Yüksek (30%)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="unitLabel">Birim</label>
+                        <select id="sizeUnit" onchange="toggleSizeInputs()">
+                            <option value="px" selected data-i18n="unitPx">Piksel (px)</option>
+                            <option value="cm" data-i18n="unitCm">Santimetre (cm)</option>
+                            <option value="inch" data-i18n="unitInch">İnç (inch)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="options-grid" id="pxSizeControl">
+                    <div class="input-group">
+                        <label data-i18n="predefinedSizeLabel">Ön Tanımlı Boyut</label>
+                        <select id="qrSize">
+                            <option value="256">256px</option>
+                            <option value="512" selected>512px</option>
+                            <option value="1024">1024px (HD)</option>
+                            <option value="2048">2048px (Ultra HD)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="marginPxLabel">Kenar Boşluğu (px)</label>
+                        <input type="number" id="pxMargin" value="20" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="aspectRatioLabel">Görünüm Oranı</label>
+                        <select id="aspectRatio">
+                            <option value="1:1" selected data-i18n="ratio11">1:1 (Kare)</option>
+                            <option value="4:3" data-i18n="ratio43">4:3</option>
+                            <option value="16:9" data-i18n="ratio169">16:9</option>
+                            <option value="free" data-i18n="ratioFree">Serbest</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="options-grid hidden" id="physicalSizeControl">
+                    <div class="input-group">
+                        <label data-i18n="widthLabel">Genişlik</label>
+                        <input type="number" id="physWidth" value="5" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="heightLabel">Yükseklik</label>
+                        <input type="number" id="physHeight" value="5" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="marginPhysLabel">Kenar Boşluğu</label>
+                        <input type="number" id="physMargin" value="0.5" step="0.1">
+                    </div>
+                </div>
+                <div class="toggle-group">
+                    <div class="toggle" id="invertToggle" onclick="toggleInvert()"></div>
+                    <span data-i18n="invertLabel">Ters Renk (Beyaz/Siyah)</span>
+                </div>
+                <div class="toggle-group">
+                    <div class="toggle active" id="quietToggle" onclick="toggleQuiet()"></div>
+                    <span data-i18n="quietLabel">Quiet Zone Göster</span>
+                </div>
+
+                <div class="toggle-group" id="singleBtnArea">
+                    <button class="btn btn-primary btn-large" id="genBtn" onclick="generateQR()" data-i18n="genBtn">QR
+                        Kod
+                        Oluştur</button>
+                </div>
+                <div class="toggle-group hidden" id="vcardBtnArea">
+                    <button class="btn btn-primary btn-large" id="genVcardBtn" onclick="generateQR()" data-i18n="genVcardBtn">QR Kartvizit Oluştur</button>
+                </div>
+                <div class="toggle-group hidden" id="wifiBtnArea">
+                    <button class="btn btn-primary btn-large" id="genWifiBtn" onclick="generateQR()" data-i18n="genWifiBtn">WiFi QR Oluştur</button>
+                </div>
+                <div class="toggle-group hidden" id="bulkBtnArea">
+                    <button class="btn btn-success btn-large" id="bulkExportBtn" onclick="exportBulkZip()" disabled
+                        data-i18n="bulkExportBtn">
+                        ZIP Olarak İndir</button>
+                </div>
+
+                <div class="export-buttons" id="singleExportBtns">
+                    <button class="btn btn-secondary" onclick="exportPNG()" id="btnPng" disabled>PNG</button>
+                    <button class="btn btn-secondary" onclick="exportJPEG()" id="btnJpeg" disabled>JPEG</button>
+                    <button class="btn btn-secondary" onclick="exportSVG()" id="btnSvg" disabled>SVG</button>
+                    <button class="btn btn-secondary" onclick="exportPDF()" id="btnPdf" disabled>PDF</button>
+                    <button class="btn btn-success" onclick="copyToClipboard()" id="btnCopy" disabled
+                        data-i18n="copyBtn">Kopyala</button>
+                </div>
+            </div>
+            <div class="card">
+                <h2 data-i18n="previewTitle">Önizleme</h2>
+                <div class="qr-preview">
+                    <div id="quietZoneWrapper" class="quiet-zone">
+                        <div id="qrContainer">
+                            <div class="no-qr" data-i18n="noQr">QR kod oluşturmak için metin girin ve "Oluştur" butonuna
+                                tıklayın</div>
+                        </div>
+                    </div>
+                    <div id="scanScore" class="score-badge score-high hidden">Taranabilirlik: Mükemmel</div>
+                    <div id="vcardTip" class="bulk-info hidden" style="margin-top: 12px; text-align: center;" data-i18n="vcardTip">Telefonda bu QR'ı okutun — kişi ekleme ekranı açılır.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="app-footer">Geliştirici : <a href="https://webtera.tr" target="_blank" rel="noopener noreferrer">webtera</a> <br> v2.0</footer>
+
+    <canvas id="exportCanvas" style="display: none;"></canvas>
+
+    <script>
+        /* fflate v0.8.2 - Lightweight ZIP library */
+        !function (f) { typeof module != "undefined" && typeof exports == "object" ? module.exports = f() : typeof define != "undefined" && define.amd ? define(f) : (typeof self != "undefined" ? self : this).fflate = f() }(function () { var _e = {}; "use strict"; var t = (typeof module != "undefined" && typeof exports == "object" ? function (_f) { "use strict"; var e, t = ";var __w=require('worker_threads');__w.parentPort.on('message',function(m){onmessage({data:m})}),postMessage=function(m,t){__w.parentPort.postMessage(m,t)},close=process.exit;self=global"; try { e = require("worker_threads").Worker } catch (e) { } _f.default = e ? function (r, n, o, a, s) { var u = !1, i = new e(r + t, { eval: !0 }).on("error", function (e) { return s(e, null) }).on("message", function (e) { return s(null, e) }).on("exit", function (e) { e && !u && s(Error("exited with code " + e), null) }); return i.postMessage(o, a), i.terminate = function () { return u = !0, e.prototype.terminate.call(i) }, i } : function (e, t, r, n, o) { setImmediate(function () { return o(Error("async operations unsupported"), null) }); var a = function () { }; return { terminate: a, postMessage: a } }; return _f } : function (_f) { "use strict"; var e = {}; _f.default = function (r, t, s, a, n) { var o = new Worker(e[t] || (e[t] = URL.createObjectURL(new Blob([r + ';addEventListener("error",function(e){e=e.error;postMessage({$e$:[e.message,e.code,e.stack]})})'], { type: "text/javascript" })))); return o.onmessage = function (e) { var r = e.data, t = r.$e$; if (t) { var s = Error(t[0]); s.code = t[1], s.stack = t[2], n(s, null) } else n(null, r) }, o.postMessage(s, a), o }; return _f })({}), n = Uint8Array, r = Uint16Array, e = Int32Array, i = new n([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0]), o = new n([0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0]), s = new n([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]), a = function (t, n) { for (var i = new r(31), o = 0; o < 31; ++o)i[o] = n += 1 << t[o - 1]; var s = new e(i[30]); for (o = 1; o < 30; ++o)for (var a = i[o]; a < i[o + 1]; ++a)s[a] = a - i[o] << 5 | o; return { b: i, r: s } }, u = a(i, 2), h = u.b, f = u.r; h[28] = 258, f[258] = 28; for (var l = a(o, 0), c = l.b, p = l.r, v = new r(32768), d = 0; d < 32768; ++d) { var g = (43690 & d) >> 1 | (21845 & d) << 1; v[d] = ((65280 & (g = (61680 & (g = (52428 & g) >> 2 | (13107 & g) << 2)) >> 4 | (3855 & g) << 4)) >> 8 | (255 & g) << 8) >> 1 } var y = function (t, n, e) { for (var i = t.length, o = 0, s = new r(n); o < i; ++o)t[o] && ++s[t[o] - 1]; var a, u = new r(n); for (o = 1; o < n; ++o)u[o] = u[o - 1] + s[o - 1] << 1; if (e) { a = new r(1 << n); var h = 15 - n; for (o = 0; o < i; ++o)if (t[o]) for (var f = o << 4 | t[o], l = n - t[o], c = u[t[o] - 1]++ << l, p = c | (1 << l) - 1; c <= p; ++c)a[v[c] >> h] = f } else for (a = new r(i), o = 0; o < i; ++o)t[o] && (a[o] = v[u[t[o] - 1]++] >> 15 - t[o]); return a }, m = new n(288); for (d = 0; d < 144; ++d)m[d] = 8; for (d = 144; d < 256; ++d)m[d] = 9; for (d = 256; d < 280; ++d)m[d] = 7; for (d = 280; d < 288; ++d)m[d] = 8; var b = new n(32); for (d = 0; d < 32; ++d)b[d] = 5; var w = y(m, 9, 0), x = y(m, 9, 1), z = y(b, 5, 0), k = y(b, 5, 1), M = function (t) { for (var n = t[0], r = 1; r < t.length; ++r)t[r] > n && (n = t[r]); return n }, S = function (t, n, r) { var e = n / 8 | 0; return (t[e] | t[e + 1] << 8) >> (7 & n) & r }, A = function (t, n) { var r = n / 8 | 0; return (t[r] | t[r + 1] << 8 | t[r + 2] << 16) >> (7 & n) }, T = function (t) { return (t + 7) / 8 | 0 }, D = function (t, r, e) { return (null == r || r < 0) && (r = 0), (null == e || e > t.length) && (e = t.length), new n(t.subarray(r, e)) }; var C = ["unexpected EOF", "invalid block type", "invalid length/literal", "invalid distance", "stream finished", "no stream handler", , "no callback", "invalid UTF-8 data", "extra field too long", "date not in range 1980-2099", "filename too long", "stream finishing", "invalid zip data"], I = function (t, n, r) { var e = Error(n || C[t]); if (e.code = t, Error.captureStackTrace && Error.captureStackTrace(e, I), !r) throw e; return e }, U = function (t, r, e, a) { var u = t.length, f = a ? a.length : 0; if (!u || r.f && !r.l) return e || new n(0); var l = !e, p = l || 2 != r.i, v = r.i; l && (e = new n(3 * u)); var d = function (t) { var r = e.length; if (t > r) { var i = new n(Math.max(2 * r, t)); i.set(e), e = i } }; var g = r.f || 0, m = r.p || 0, b = r.b || 0, w = r.l, z = r.d, C = r.m, U = r.n, F = 8 * u; do { if (!w) { g = S(t, m, 1); var E = S(t, m + 1, 3); if (m += 3, !E) { var J = T(m) + 4, q = J + (t[J - 4] | t[J - 3] << 8); if (q > u) { v && I(0); break } p && d(b + (q - J)), e.set(t.subarray(J, q), b), r.b = b += (q - J), r.p = m = 8 * q, r.f = g; continue } if (1 == E) w = x, z = k, C = 9, U = 5; else if (2 == E) { var O = S(t, m, 31) + 257, G = S(t, m + 10, 15) + 4, L = O + S(t, m + 5, 31) + 1; m += 14; for (var H = new n(L), j = new n(19), N = 0; N < G; ++N)j[s[N]] = S(t, m + 3 * N, 7); m += 3 * G; var P = M(j), B = (1 << P) - 1, Y = y(j, P, 1); for (N = 0; N < L;) { var K, Q = Y[S(t, m, B)]; if (m += 15 & Q, (K = Q >> 4) < 16) H[N++] = K; else { var R = 0, V = 0; for (16 == K ? (V = 3 + S(t, m, 3), m += 2, R = H[N - 1]) : 17 == K ? (V = 3 + S(t, m, 7), m += 3) : 18 == K && (V = 11 + S(t, m, 127), m += 7); V--;)H[N++] = R } } var W = H.subarray(0, O), X = H.subarray(O); C = M(W), U = M(X), w = y(W, C, 1), z = y(X, U, 1) } else I(1); if (m > F) { v && I(0); break } } p && d(b + 131072); for (var $ = T(m), _ = (1 << C) - 1, tt = (1 << U) - 1, rt = m; ; rt = m) { var et = (Q = w[A(t, m) & _]) >> 4; if ((m += 15 & Q) > F) { v && I(0); break } if (Q || I(2), et < 256) e[b++] = et; else { if (256 == et) { rt = m, w = null; break } var nt = et - 254; et > 264 && (nt = S(t, m, (1 << (ot = i[N = et - 257])) - 1) + h[N], m += ot); var st = z[A(t, m) & tt], at = st >> 4; if (st || I(3), m += 15 & st, W = c[at], at > 3) { var ot = o[at]; W += A(t, m) & (1 << ot) - 1, m += ot } if (m > F) { v && I(0); break } p && d(b + 131072); var ut = b + nt; if (b < W) { var ft = f - W, lt = Math.min(W, ut); for (ft + b < 0 && I(3); b < lt; ++b)e[b] = a[ft + b] } for (; b < ut; ++b)e[b] = e[b - W] } } r.l = w, r.p = rt, r.b = b, r.f = g, w && (g = 1, r.m = C, r.d = z, r.n = U) } while (!g); return b != e.length && l ? D(e, 0, b) : e.subarray(0, b) }, F = function (t, n, r) { var e = n / 8 | 0; t[e] |= r <<= 7 & n, t[e + 1] |= r >> 8 }, E = function (t, n, r) { var e = n / 8 | 0; t[e] |= r <<= 7 & n, t[e + 1] |= r >> 8, t[e + 2] |= r >> 16 }, L = function (t, n, e) { var i = e.length, o = T(n + 2); t[o] = 255 & i, t[o + 1] = i >> 8, t[o + 2] = 255 ^ t[o], t[o + 3] = 255 ^ t[o + 1]; for (var s = 0; s < i; ++s)t[o + s + 4] = e[s]; return 8 * (o + 4 + i) }, Z = function (t, n) { t[0] = 31, t[1] = 139, t[2] = 8, t[8] = n.level < 2 ? 4 : n.level == 9 ? 2 : 0, t[9] = 3, n.mtime != 0 && ct(t, 4, Math.floor(new Date(n.mtime || Date.now()) / 1e3)); var r = n.filename; if (r) { t[3] = 8; for (var e = 0; e <= r.length; ++e)t[e + 10] = r.charCodeAt(e) } }, ct = function (t, n, r) { for (; r; ++n)t[n] = r, r >>>= 8 }, K = function (t, n, r, e, i) { var o = t.length, s = i.z || o; var a = new n(r + s + 5 * (1 + Math.ceil(s / 7e3)) + e), u = a.subarray(r, a.length - e), h = i.l, f = 7 & (i.r || 0); if (h) { for (var l = Math.ceil(s / 65535), c = 0; c < l; ++c) { var p = c * 65535, v = Math.min(p + 65535, s); f = L(u, f + 1, t.subarray(p, v)) } } else { for (var c = 0; c < s; c += 65535) { var p = c, v = Math.min(p + 65535, s); if (v == s) u[f / 8 | 0] = 1; f = L(u, f + 1, t.subarray(p, v)) } } return D(a, 0, r + T(f) + e) }, Y = function () { var t = -1; return { p: function (n) { for (var r = t, e = 0; e < n.length; ++e)r = B[255 & r ^ n[e]] ^ r >>> 8; t = r }, d: function () { return ~t } } }, B = function () { for (var t = new Int32Array(256), n = 0; n < 256; ++n) { for (var r = n, e = 9; --e;)r = (1 & r && -306674912) ^ r >>> 1; t[n] = r } return t }(), hn = function (t, n, r, e, i, o, s, a) { var u = e.length, h = r.extra, f = a && a.length; ct(t, n, s != null ? 33639248 : 67324752), n += 4, s != null && (t[n++] = 20, t[n++] = r.os || 0), t[n] = 20, n += 2, t[n++] = r.flag << 1, t[n++] = i && 8, t[n++] = 255 & r.compression, t[n++] = r.compression >> 8; var l = new Date(r.mtime == null ? Date.now() : r.mtime), c = l.getFullYear() - 1980; ct(t, n, c << 25 | l.getMonth() + 1 << 21 | l.getDate() << 16 | l.getHours() << 11 | l.getMinutes() << 5 | l.getSeconds() >> 1), n += 4, o != -1 && (ct(t, n, r.crc), ct(t, n + 4, o < 0 ? -o - 2 : o), ct(t, n + 8, r.size)), ct(t, n + 12, u), ct(t, n + 14, 0), n += 16, s != null && (ct(t, n, f || 0), ct(t, n + 6, r.attrs || 0), ct(t, n + 10, s), n += 14), t.set(e, n), n += u; return f && (t.set(a, n), n += f), n }, fn = function (t, n, r, e, i) { ct(t, n, 101010256), ct(t, n + 8, r), ct(t, n + 10, r), ct(t, n + 12, e), ct(t, n + 16, i) }; _e.zipSync = function (t, r) { r = r || {}; var e = {}, i = [], o = 0, s = 0; for (var a in t) { var u = t[a], h = a.length, f = r.level == 0 ? 0 : 8, l = new Uint8Array(h); for (var c = 0; c < h; ++c) l[c] = a.charCodeAt(c); var p = K(u, Uint8Array, 30 + h, 0, { level: r.level || 6 }); var v = p.length, d = Y(); d.p(u); var w = hn(p, 0, { crc: d.d(), flag: 0, compression: f, mtime: r.mtime, size: u.length }, l, 0, v - 30 - h); i.push({ size: u.length, crc: d.d(), c: p, f: l, compression: f, o: o }), o += v } for (var g = 0, y = i.length; g < y; ++g) { var m = i[g]; s += 46 + m.f.length } var w = new Uint8Array(o + s + 22), x = o; for (var g = 0; g < y; ++g) { var m = i[g]; w.set(m.c, m.o), hn(w, x, m, m.f, 0, m.c.length - 30 - m.f.length, m.o), x += 46 + m.f.length } fn(w, x, y, s, o); return w }; return _e });
+
+
+        /**
+         * Fully stabilized and industrial-grade QR engine based on Arase's logic.
+         */
+        var qrcode = function () {
+            var QR_QRCode = function (typeNumber, errorCorrectLevel) {
+                this._typeNumber = typeNumber;
+                this._errorCorrectLevel = errorCorrectLevel;
+                this._modules = null;
+                this._moduleCount = 0;
+                this._dataList = [];
+            };
+            QR_QRCode.prototype = {
+                addData: function (data) { this._dataList.push(new QR_8bitByte(data)); },
+                isDark: function (row, col) { return this._modules[row][col]; },
+                getModuleCount: function () { return this._moduleCount; },
+                make: function () {
+                    if (this._typeNumber < 1) {
+                        var typeNumber = 1;
+                        for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+                            var rsBlocks = QR_RSBlock.getRSBlocks(typeNumber, this._errorCorrectLevel);
+                            var buffer = new QR_BitBuffer();
+                            for (var i = 0; i < this._dataList.length; i++) {
+                                var data = this._dataList[i];
+                                buffer.put(data.mode, 4);
+                                buffer.put(data.getLength(), QR_Util.getLengthInBits(data.mode, typeNumber));
+                                data.write(buffer);
+                            }
+                            var totalDataCount = 0;
+                            for (i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+                            if (buffer.getLengthInBits() <= 8 * totalDataCount) break;
+                        }
+                        this._typeNumber = typeNumber;
+                    }
+                    this.makeImpl(false, this.getBestMaskPattern());
+                },
+                makeImpl: function (test, maskPattern) {
+                    this._moduleCount = 4 * this._typeNumber + 17;
+                    this._modules = new Array(this._moduleCount);
+                    for (var r = 0; r < this._moduleCount; r++) {
+                        this._modules[r] = new Array(this._moduleCount);
+                        for (var c = 0; c < this._moduleCount; c++) this._modules[r][c] = null;
+                    }
+                    this.setupPositionProbePattern(0, 0);
+                    this.setupPositionProbePattern(this._moduleCount - 7, 0);
+                    this.setupPositionProbePattern(0, this._moduleCount - 7);
+                    this.setupPositionAdjustPattern();
+                    this.setupTimingPattern();
+                    this.setupTypeInfo(test, maskPattern);
+                    if (this._typeNumber >= 7) this.setupTypeNumber(test);
+                    this.mapData(this.createData(this._typeNumber, this._errorCorrectLevel, this._dataList), maskPattern);
+                },
+                createData: function (typeNumber, errorLevel, dataList) {
+                    var rsBlocks = QR_RSBlock.getRSBlocks(typeNumber, errorLevel);
+                    var buffer = new QR_BitBuffer();
+                    for (var i = 0; i < dataList.length; i++) {
+                        var data = dataList[i];
+                        buffer.put(data.mode, 4);
+                        buffer.put(data.getLength(), QR_Util.getLengthInBits(data.mode, typeNumber));
+                        data.write(buffer);
+                    }
+                    var totalDataCount = 0;
+                    for (i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+                    if (buffer.getLengthInBits() + 4 <= 8 * totalDataCount) buffer.put(0, 4);
+                    while (buffer.getLengthInBits() % 8 != 0) buffer.putBit(false);
+                    while (true) {
+                        if (buffer.getLengthInBits() >= 8 * totalDataCount) break;
+                        buffer.put(236, 8);
+                        if (buffer.getLengthInBits() >= 8 * totalDataCount) break;
+                        buffer.put(17, 8);
+                    }
+                    return this.createDataBytes(buffer, rsBlocks);
+                },
+                createDataBytes: function (buffer, rsBlocks) {
+                    var offset = 0, maxDataCount = 0, maxErrorCount = 0;
+                    var dataBytes = new Array(rsBlocks.length), errorBytes = new Array(rsBlocks.length);
+                    for (var i = 0; i < rsBlocks.length; i++) {
+                        var dataCount = rsBlocks[i].dataCount, errorCount = rsBlocks[i].totalCount - dataCount;
+                        maxDataCount = Math.max(maxDataCount, dataCount);
+                        maxErrorCount = Math.max(maxErrorCount, errorCount);
+                        dataBytes[i] = new Array(dataCount);
+                        for (var j = 0; j < dataBytes[i].length; j++) dataBytes[i][j] = 255 & buffer.buffer[j + offset];
+                        offset += dataCount;
+                        var poly = QR_Util.getErrorCorrectPolynomial(errorCount);
+                        var mod = new QR_Polynomial(dataBytes[i], poly.getLength() - 1).mod(poly);
+                        errorBytes[i] = new Array(poly.getLength() - 1);
+                        for (j = 0; j < errorBytes[i].length; j++) {
+                            var v = j + mod.getLength() - errorBytes[i].length;
+                            errorBytes[i][j] = v >= 0 ? mod.get(v) : 0;
+                        }
+                    }
+                    var totalCount = 0;
+                    for (i = 0; i < rsBlocks.length; i++) totalCount += rsBlocks[i].totalCount;
+                    var res = new Array(totalCount), count = 0;
+                    for (j = 0; j < maxDataCount; j++) for (i = 0; i < rsBlocks.length; i++) j < dataBytes[i].length && (res[count++] = dataBytes[i][j]);
+                    for (j = 0; j < maxErrorCount; j++) for (i = 0; i < rsBlocks.length; i++) j < errorBytes[i].length && (res[count++] = errorBytes[i][j]);
+                    return res;
+                },
+                setupPositionProbePattern: function (row, col) {
+                    for (var r = -1; r <= 7; r++) if (!(row + r <= -1 || this._moduleCount <= row + r)) {
+                        for (var c = -1; c <= 7; c++) if (!(col + c <= -1 || this._moduleCount <= col + c)) {
+                            this._modules[row + r][col + c] = (0 <= r && r <= 6 && (0 == c || 6 == c) || 0 <= c && c <= 6 && (0 == r || 6 == r) || 2 <= r && r <= 4 && 2 <= c && c <= 4);
+                        }
+                    }
+                },
+                getBestMaskPattern: function () {
+                    for (var minScore = 0, bestPattern = 0, i = 0; i < 8; i++) {
+                        this.makeImpl(true, i);
+                        var score = QR_Util.getLostPoint(this);
+                        if (0 == i || score < minScore) { minScore = score; bestPattern = i; }
+                    }
+                    return bestPattern;
+                },
+                setupTimingPattern: function () {
+                    for (var i = 8; i < this._moduleCount - 8; i++) null == this._modules[i][6] && (this._modules[i][6] = i % 2 == 0);
+                    for (i = 8; i < this._moduleCount - 8; i++) null == this._modules[6][i] && (this._modules[6][i] = i % 2 == 0);
+                },
+                setupPositionAdjustPattern: function () {
+                    var pos = QR_Util.getPatternPosition(this._typeNumber);
+                    for (var i = 0; i < pos.length; i++) for (var j = 0; j < pos.length; j++) {
+                        var r = pos[i], c = pos[j];
+                        if (null == this._modules[r][c]) for (var dr = -2; dr <= 2; dr++) for (var dc = -2; dc <= 2; dc++) this._modules[r + dr][c + dc] = (-2 == dr || 2 == dr || -2 == dc || 2 == dc || 0 == dr && 0 == dc);
+                    }
+                },
+                setupTypeNumber: function (test) {
+                    var bits = QR_Util.getBCHTypeNumber(this._typeNumber);
+                    for (var i = 0; i < 18; i++) this._modules[Math.floor(i / 3)][i % 3 + this._moduleCount - 8 - 3] = !test && (bits >> i & 1) == 1;
+                    for (i = 0; i < 18; i++) this._modules[i % 3 + this._moduleCount - 8 - 3][Math.floor(i / 3)] = !test && (bits >> i & 1) == 1;
+                },
+                setupTypeInfo: function (test, maskPattern) {
+                    var info = this._errorCorrectLevel << 3 | maskPattern, bits = QR_Util.getBCHTypeInfo(info);
+                    for (var i = 0; i < 15; i++) {
+                        var v = !test && (bits >> i & 1) == 1;
+                        if (i < 6) this._modules[i][8] = v; else if (i < 8) this._modules[i + 1][8] = v; else this._modules[this._moduleCount - 15 + i][8] = v;
+                    }
+                    for (i = 0; i < 15; i++) {
+                        v = !test && (bits >> i & 1) == 1;
+                        if (i < 8) this._modules[8][this._moduleCount - i - 1] = v; else if (i < 9) this._modules[8][15 - i - 1 + 1] = v; else this._modules[8][15 - i - 1] = v;
+                    }
+                    this._modules[this._moduleCount - 8][8] = !test;
+                },
+                mapData: function (data, maskPattern) {
+                    var inc = -1, row = this._moduleCount - 1, bitIndex = 7, byteIndex = 0;
+                    for (var col = this._moduleCount - 1; col > 0; col -= 2) {
+                        if (col == 6) col--;
+                        while (true) {
+                            for (var c = 0; c < 2; c++) if (null == this._modules[row][col - c]) {
+                                var dark = false; if (byteIndex < data.length) dark = (data[byteIndex] >>> bitIndex & 1) == 1;
+                                if (QR_Util.getMask(maskPattern, row, col - c)) dark = !dark;
+                                this._modules[row][col - c] = dark;
+                                bitIndex--; if (bitIndex == -1) { byteIndex++; bitIndex = 7; }
+                            }
+                            row += inc; if (row < 0 || this._moduleCount <= row) { row -= inc; inc = -inc; break; }
+                        }
+                    }
+                },
+                createSvg: function (cellSize, margin, colorDark, colorLight) {
+                    var moduleCount = this.getModuleCount(), size = moduleCount * cellSize + 2 * margin;
+                    var res = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + size + ' ' + size + '" shape-rendering="crispEdges">';
+                    res += '<rect width="100%" height="100%" fill="' + colorLight + '"/>';
+                    res += '<path fill="' + colorDark + '" d="';
+                    for (var r = 0; r < moduleCount; r++) for (var c = 0; c < moduleCount; c++) if (this.isDark(r, c)) res += 'M' + (c * cellSize + margin) + ',' + (r * cellSize + margin) + 'h' + cellSize + 'v' + cellSize + 'h-' + cellSize + 'z ';
+                    return res + '"/>' + '</svg>';
+                }
+            };
+            var QR_8bitByte = function (data) { this.mode = 4; this.data = data; this.parsedData = []; var t = unescape(encodeURIComponent(data)); for (var i = 0; i < t.length; i++) this.parsedData.push(t.charCodeAt(i)); };
+            QR_8bitByte.prototype = { getLength: function () { return this.parsedData.length; }, write: function (buffer) { for (var i = 0; i < this.parsedData.length; i++) buffer.put(this.parsedData[i], 8); } };
+            var QR_RSBlock = {
+                RS_BLOCK_TABLE: [
+                    [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9], [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16], [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13], [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9], [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
+                    [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15], [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14], [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15], [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
+                    [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16], [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13],
+                    [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15], [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12],
+                    [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13], [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12, 7, 37, 13],
+                    [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16], [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15],
+                    [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15], [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14],
+                    [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16], [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17],
+                    [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13], [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16],
+                    [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17], [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16],
+                    [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17], [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16],
+                    [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16], [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16],
+                    [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16], [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16],
+                    [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16], [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16],
+                    [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17], [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16],
+                    [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16], [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16],
+                    [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16], [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16],
+                    [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]
+                ],
+                getRSBlocks: function (typeNum, errorLevel) { var table = QR_RSBlock.getRSBlockTable(typeNum, errorLevel); if (!table) throw new Error("bad rs block"); var length = table.length / 3, res = []; for (var i = 0; i < length; i++) for (var count = table[3 * i + 0], total = table[3 * i + 1], data = table[3 * i + 2], j = 0; j < count; j++) res.push(new QR_DataBlock(total, data)); return res; },
+                getRSBlockTable: function (typeNum, errorLevel) { switch (errorLevel) { case 1: return QR_RSBlock.RS_BLOCK_TABLE[4 * (typeNum - 1)]; case 0: return QR_RSBlock.RS_BLOCK_TABLE[4 * (typeNum - 1) + 1]; case 3: return QR_RSBlock.RS_BLOCK_TABLE[4 * (typeNum - 1) + 2]; case 2: return QR_RSBlock.RS_BLOCK_TABLE[4 * (typeNum - 1) + 3]; } }
+            };
+            var QR_BitBuffer = function () { this.buffer = []; this.length = 0; };
+            QR_BitBuffer.prototype = { get: function (index) { return (this.buffer[Math.floor(index / 8)] >>> 7 - index % 8 & 1) == 1; }, put: function (num, len) { for (var i = 0; i < len; i++) this.putBit((num >>> len - i - 1 & 1) == 1); }, getLengthInBits: function () { return this.length; }, putBit: function (bit) { var i = Math.floor(this.length / 8); this.buffer.length <= i && this.buffer.push(0); bit && (this.buffer[i] |= 128 >>> this.length % 8); this.length++; } };
+            var QR_Math = { glog: function (n) { if (n < 1) return 0; return QR_Math.LOG_TABLE[n]; }, gexp: function (n) { while (n < 0) n += 255; while (n >= 256) n -= 255; return QR_Math.EXP_TABLE[n]; }, EXP_TABLE: new Array(256), LOG_TABLE: new Array(256) };
+            for (var i = 0; i < 8; i++) QR_Math.EXP_TABLE[i] = 1 << i;
+            for (i = 8; i < 256; i++) QR_Math.EXP_TABLE[i] = QR_Math.EXP_TABLE[i - 4] ^ QR_Math.EXP_TABLE[i - 5] ^ QR_Math.EXP_TABLE[i - 6] ^ QR_Math.EXP_TABLE[i - 8];
+            for (i = 0; i < 255; i++) QR_Math.LOG_TABLE[QR_Math.EXP_TABLE[i]] = i;
+            var QR_Polynomial = function (num, shift) {
+                if (num.length == undefined) throw new Error(num.length + "/" + shift);
+                var offset = 0; while (offset < num.length && num[offset] == 0) offset++;
+                this.num = new Array(num.length - offset + shift);
+                for (var i = 0; i < this.num.length; i++) this.num[i] = 0;
+                for (i = 0; i < num.length - offset; i++) this.num[i] = num[i + offset];
+            };
+            QR_Polynomial.prototype = {
+                get: function (i) { return this.num[i]; }, getLength: function () { return this.num.length; },
+                multiply: function (e) {
+                    var num = new Array(this.getLength() + e.getLength() - 1);
+                    for (var i = 0; i < num.length; i++) num[i] = 0;
+                    for (i = 0; i < this.getLength(); i++) for (var j = 0; j < e.getLength(); j++) num[i + j] ^= QR_Math.gexp(QR_Math.glog(this.get(i)) + QR_Math.glog(e.get(j)));
+                    return new QR_Polynomial(num, 0);
+                },
+                mod: function (e) {
+                    if (this.getLength() - e.getLength() < 0) return this;
+                    var ratio = QR_Math.glog(this.get(0)) - QR_Math.glog(e.get(0));
+                    var num = new Array(this.getLength());
+                    for (var i = 0; i < this.getLength(); i++) num[i] = this.get(i);
+                    for (i = 0; i < e.getLength(); i++) num[i] ^= QR_Math.gexp(QR_Math.glog(e.get(i)) + ratio);
+                    return new QR_Polynomial(num, 0).mod(e);
+                }
+            };
+            var QR_DataBlock = function (totalCount, dataCount) { this.totalCount = totalCount; this.dataCount = dataCount; };
+            var QR_Util = {
+                PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]],
+                G15: 1335, G18: 7973, G15_MASK: 21522,
+                getBCHTypeInfo: function (data) { var d = data << 10; while (QR_Util.getBCHDigit(d) - QR_Util.getBCHDigit(QR_Util.G15) >= 0) d ^= QR_Util.G15 << QR_Util.getBCHDigit(d) - QR_Util.getBCHDigit(QR_Util.G15); return (data << 10 | d) ^ QR_Util.G15_MASK; },
+                getBCHTypeNumber: function (data) { var d = data << 12; while (QR_Util.getBCHDigit(d) - QR_Util.getBCHDigit(QR_Util.G18) >= 0) d ^= QR_Util.G18 << QR_Util.getBCHDigit(d) - QR_Util.getBCHDigit(QR_Util.G18); return data << 12 | d; },
+                getBCHDigit: function (data) { var res = 0; while (data != 0) { res++; data >>>= 1; } return res; },
+                getPatternPosition: function (typeNum) { return QR_Util.PATTERN_POSITION_TABLE[typeNum - 1]; },
+                getMask: function (pattern, r, c) { switch (pattern) { case 0: return (r + c) % 2 == 0; case 1: return r % 2 == 0; case 2: return c % 3 == 0; case 3: return (r + c) % 3 == 0; case 4: return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 == 0; case 5: return r * c % 2 + r * c % 3 == 0; case 6: return (r * c % 2 + r * c % 3) % 2 == 0; case 7: return (r * c % 3 + (r + c) % 2) % 2 == 0; } },
+                getLostPoint: function (qr) {
+                    var count = qr.getModuleCount(), res = 0;
+                    for (var r = 0; r < count; r++) for (var c = 0; c < count; c++) { var sameCount = 0, dark = qr.isDark(r, c); for (var dr = -1; dr <= 1; dr++) if (!(r + dr < 0 || count <= r + dr)) for (var dc = -1; dc <= 1; dc++) if (!(c + dc < 0 || count <= c + dc) && (0 != dr || 0 != dc) && dark == qr.isDark(r + dr, c + dc)) sameCount++; if (sameCount > 5) res += 3 + sameCount - 5; }
+                    for (r = 0; r < count - 1; r++) for (c = 0; c < count - 1; c++) { var l = 0; qr.isDark(r, c) && l++; qr.isDark(r + 1, c) && l++; qr.isDark(r, c + 1) && l++; qr.isDark(r + 1, c + 1) && l++; if (0 == l || 4 == l) res += 3; }
+                    for (r = 0; r < count; r++) for (c = 0; c < count - 6; c++) qr.isDark(r, c) && !qr.isDark(r, c + 1) && qr.isDark(r, c + 2) && qr.isDark(r, c + 3) && qr.isDark(r, c + 4) && !qr.isDark(r, c + 5) && qr.isDark(r, c + 6) && (res += 40);
+                    for (c = 0; c < count; c++) for (r = 0; r < count - 6; r++) qr.isDark(r, c) && !qr.isDark(r + 1, c) && qr.isDark(r + 2, c) && qr.isDark(r + 3, c) && qr.isDark(r + 4, c) && !qr.isDark(r + 5, c) && qr.isDark(r + 6, c) && (res += 40);
+                    var dSum = 0; for (r = 0; r < count; r++) for (c = 0; c < count; c++) qr.isDark(r, c) && dSum++;
+                    return res += 10 * (Math.abs(100 * dSum / (count * count) - 50) / 5);
+                },
+                getLengthInBits: function (mode, typeNum) { if (1 <= typeNum && typeNum < 10) switch (mode) { case 1: return 10; case 2: return 9; case 4: return 8; case 8: return 8; } else if (typeNum < 27) switch (mode) { case 1: return 12; case 2: return 11; case 4: return 16; case 8: return 10; } else switch (mode) { case 1: return 14; case 2: return 13; case 4: return 16; case 8: return 12; } },
+                getErrorCorrectPolynomial: function (len) { var poly = new QR_Polynomial([1], 0); for (var i = 0; i < len; i++) poly = poly.multiply(new QR_Polynomial([1, QR_Math.gexp(i)], 0)); return poly; }
+            };
+            return function (typeNumber, errorLevel) { var qr = new QR_QRCode(typeNumber, errorLevel); return qr; };
+        }();
+
+        // Application UI Logic
+        const translations = {
+            tr: {
+                title: 'QR Code Generator',
+                tabSingle: 'Tek QR', tabBulk: 'Toplu QR', tabVcard: 'vCARD', tabWifi: 'WiFi',
+                settingsTitle: 'Ayarlar', previewTitle: 'Önizleme',
+                vcardDesc: 'QR okutulduğunda Android ve iOS\'ta kişi ekleme ekranı açılır.',
+                vcardFirstName: 'Ad', vcardLastName: 'Soyad', vcardOrg: 'Şirket / Kurum', vcardTitle: 'Ünvan',
+                vcardTel: 'Telefon', vcardEmail: 'E-posta', vcardUrl: 'Web Adresi (URL)', vcardAddress: 'Adres (isteğe bağlı)', vcardNote: 'Not (isteğe bağlı)',
+                genVcardBtn: 'QR Kartvizit Oluştur', vcardTip: 'Telefonda bu QR\'ı okutun — kişi ekleme ekranı açılır.',
+                wifiDesc: 'QR okutulunca cihaz WiFi ağına bağlanır (Android/iOS uyumlu).', wifiSsid: 'Ağ adı (SSID)', wifiPassword: 'Şifre', wifiSecurity: 'Güvenlik',
+                wifiWpa: 'WPA/WPA2', wifiWep: 'WEP', wifiNone: 'Yok (açık ağ)', genWifiBtn: 'WiFi QR Oluştur',
+                textLabel: 'Metin / URL', textPlaceholder: 'QR kodu için metin girin...',
+                bulkTextLabel: 'Toplu Metin (her satır bir QR)', bulkInfo: 'Her satır ayrı bir QR kod olarak paketlenecek',
+                formatLabel: 'Dosya Formatı', errorLevelLabel: 'Hata Düzeltme',
+                unitLabel: 'Birim', unitPx: 'Piksel (px)', unitCm: 'Santimetre (cm)', unitInch: 'İnç (inch)',
+                predefinedSizeLabel: 'Ön Tanımlı Boyut', marginPxLabel: 'Kenar Boşluğu (px)',
+                aspectRatioLabel: 'Görünüm Oranı', ratio11: '1:1 (Kare)', ratio43: '4:3', ratio169: '16:9', ratioFree: 'Serbest',
+                widthLabel: 'Genişlik', heightLabel: 'Yükseklik', marginPhysLabel: 'Kenar Boşluğu',
+                invertLabel: 'Ters Renk (Beyaz/Siyah)', quietLabel: 'Quiet Zone Göster',
+                genBtn: 'QR Kod Oluştur', bulkExportBtn: 'ZIP Olarak İndir', copyBtn: 'Kopyala',
+                noQr: 'QR kod oluşturmak için metin girin ve "Oluştur" butonuna tıklayın',
+                errorL: 'L - Düşük (7%)', errorM: 'M - Orta (15%)', errorQ: 'Q - İyi (25%)', errorH: 'H - Yüksek (30%)',
+                alertNoText: 'Lütfen metin girin!', alertBulkNoText: 'Toplu üretim için metin girmelisiniz!',
+                scoreHigh: 'Taranabilirlik: Mükemmel', scoreMedium: 'Taranabilirlik: İyi', scoreLow: 'Taranabilirlik: Düşük',
+                btnZipping: '⌛ Paketleniyor...', successArchived: ' adet QR kod başarıyla arşivlendi!',
+                themeLight: 'Aydınlık', themeDark: 'Karanlık'
+            },
+            en: {
+                title: 'QR Code Generator',
+                tabSingle: 'Single QR', tabBulk: 'Bulk QR', tabVcard: 'vCARD', tabWifi: 'WiFi',
+                settingsTitle: 'Settings', previewTitle: 'Preview',
+                vcardDesc: 'When scanned on Android or iOS, the Add Contact screen will open.',
+                vcardFirstName: 'First name', vcardLastName: 'Last name', vcardOrg: 'Company / Organization', vcardTitle: 'Title',
+                vcardTel: 'Phone', vcardEmail: 'Email', vcardUrl: 'Website (URL)', vcardAddress: 'Address (optional)', vcardNote: 'Note (optional)',
+                genVcardBtn: 'Create Contact QR', vcardTip: 'Scan this QR with your phone — Add Contact screen will open.',
+                wifiDesc: 'Scan to connect to this WiFi network (Android/iOS compatible).', wifiSsid: 'Network name (SSID)', wifiPassword: 'Password', wifiSecurity: 'Security',
+                wifiWpa: 'WPA/WPA2', wifiWep: 'WEP', wifiNone: 'None (open network)', genWifiBtn: 'Create WiFi QR',
+                textLabel: 'Text / URL', textPlaceholder: 'Enter text for QR code...',
+                bulkTextLabel: 'Bulk Text (one per line)', bulkInfo: 'Each line will be packaged as a separate QR code',
+                formatLabel: 'File Format', errorLevelLabel: 'Error Correction',
+                unitLabel: 'Unit', unitPx: 'Pixels (px)', unitCm: 'Centimeters (cm)', unitInch: 'Inches (inch)',
+                predefinedSizeLabel: 'Preset Size', marginPxLabel: 'Margin (px)',
+                aspectRatioLabel: 'Aspect Ratio', ratio11: '1:1 (Square)', ratio43: '4:3', ratio169: '16:9', ratioFree: 'Free',
+                widthLabel: 'Width', heightLabel: 'Height', marginPhysLabel: 'Margin',
+                invertLabel: 'Invert Color (White/Black)', quietLabel: 'Show Quiet Zone',
+                genBtn: 'Generate QR', bulkExportBtn: 'Download as ZIP', copyBtn: 'Copy',
+                noQr: 'Enter text and click "Generate" to create QR code',
+                errorL: 'L - Low (7%)', errorM: 'M - Medium (15%)', errorQ: 'Q - Good (25%)', errorH: 'H - High (30%)',
+                alertNoText: 'Please enter text!', alertBulkNoText: 'Please enter text for bulk generation!',
+                scoreHigh: 'Scan Score: Excellent', scoreMedium: 'Scan Score: Good', scoreLow: 'Scan Score: Low',
+                btnZipping: '⌛ Zipping...', successArchived: ' QR codes successfully archived!',
+                themeLight: 'Light', themeDark: 'Dark'
+            }
+        };
+
+
+        let lang = localStorage.getItem('qrLang') || 'tr';
+        let isInverted = false;
+        let qrGenerated = false;
+        let currentQR = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage();
+            toggleSizeInputs();
+        });
+
+        function toggleLang() {
+            lang = lang === 'tr' ? 'en' : 'tr';
+            localStorage.setItem('qrLang', lang);
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerText = translations[lang][key];
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+            document.getElementById('langBtn').innerText = lang === 'tr' ? 'EN' : 'TR';
+
+            // Theme button localization
+            const isLight = document.body.classList.contains('light-mode');
+            document.getElementById('themeBtn').innerText = isLight ? translations[lang].themeLight : translations[lang].themeDark;
+
+            switchTab(currentMode);
+        }
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            document.getElementById('themeBtn').innerText = isLight ? translations[lang].themeLight : translations[lang].themeDark;
+        }
+
+        let currentMode = 'single';
+        /** Per-tab QR state: { svg, containerStyle, dataUrl, scoreClass, scoreHtml } or null */
+        let stateByMode = { single: null, vcard: null, wifi: null };
+        let generatedByMode = { single: false, vcard: false, wifi: false };
+
+        function getNoQrPlaceholder() {
+            const msg = translations[lang].noQr;
+            return '<div class="no-qr" data-i18n="noQr">' + msg + '</div>';
+        }
+
+        function restorePreviewForMode(mode) {
+            const container = document.getElementById('qrContainer');
+            const canvas = document.getElementById('exportCanvas');
+            const scanScore = document.getElementById('scanScore');
+            const vcardTip = document.getElementById('vcardTip');
+            const state = mode === 'bulk' ? null : stateByMode[mode];
+
+            if (mode === 'bulk') {
+                container.innerHTML = getNoQrPlaceholder();
+                container.removeAttribute('style');
+                canvas.width = 0;
+                canvas.height = 0;
+                qrGenerated = false;
+                scanScore.classList.add('hidden');
+                vcardTip.classList.add('hidden');
+            } else {
+                if (state && state.svg && state.dataUrl) {
+                    container.innerHTML = state.svg;
+                    if (state.containerStyle) {
+                        Object.keys(state.containerStyle).forEach(k => {
+                            container.style[k] = state.containerStyle[k];
+                        });
+                    }
+                    const img = new Image();
+                    img.onload = function () {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        qrGenerated = true;
+                        ['btnPng', 'btnJpeg', 'btnSvg', 'btnPdf', 'btnCopy'].forEach(id => {
+                            const el = document.getElementById(id);
+                            if (el) el.disabled = false;
+                        });
+                    };
+                    img.src = state.dataUrl;
+                    if (state.scoreClass && state.scoreHtml) {
+                        scanScore.className = 'score-badge ' + state.scoreClass;
+                        scanScore.innerHTML = state.scoreHtml;
+                        scanScore.classList.remove('hidden');
+                    } else scanScore.classList.add('hidden');
+                    vcardTip.classList.toggle('hidden', mode !== 'vcard');
+                } else {
+                    container.innerHTML = getNoQrPlaceholder();
+                    container.removeAttribute('style');
+                    canvas.width = 0;
+                    canvas.height = 0;
+                    qrGenerated = false;
+                    scanScore.classList.add('hidden');
+                    vcardTip.classList.add('hidden');
+                }
+            }
+            if (!(state && state.svg && state.dataUrl)) {
+                ['btnPng', 'btnJpeg', 'btnSvg', 'btnPdf', 'btnCopy'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.disabled = true;
+                });
+            }
+        }
+
+        function switchTab(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.getAttribute('data-tab') === mode));
+
+            document.getElementById('singleMode').classList.toggle('hidden', mode !== 'single');
+            document.getElementById('bulkMode').classList.toggle('hidden', mode !== 'bulk');
+            document.getElementById('vcardMode').classList.toggle('hidden', mode !== 'vcard');
+            document.getElementById('wifiMode').classList.toggle('hidden', mode !== 'wifi');
+
+            document.getElementById('singleBtnArea').classList.toggle('hidden', mode !== 'single');
+            document.getElementById('vcardBtnArea').classList.toggle('hidden', mode !== 'vcard');
+            document.getElementById('wifiBtnArea').classList.toggle('hidden', mode !== 'wifi');
+            document.getElementById('bulkBtnArea').classList.toggle('hidden', mode !== 'bulk');
+            document.getElementById('singleExportBtns').classList.toggle('hidden', mode === 'bulk');
+
+            restorePreviewForMode(mode);
+
+            if (mode === 'bulk') {
+                document.getElementById('bulkExportBtn').disabled = false;
+            }
+        }
+        function toggleInvert() { isInverted = !isInverted; document.getElementById('invertToggle').classList.toggle('active', isInverted); if (qrGenerated) generateQR(); }
+        function toggleQuiet() { let sw = document.getElementById('quietToggle').classList.toggle('active'); document.getElementById('quietZoneWrapper').classList.toggle('quiet-zone', sw); }
+
+        function toggleSizeInputs() {
+            const unit = document.getElementById('sizeUnit').value;
+            document.getElementById('pxSizeControl').classList.toggle('hidden', unit !== 'px');
+            document.getElementById('physicalSizeControl').classList.toggle('hidden', unit === 'px');
+        }
+
+        /** Escape vCard 3.0 special characters: \ ; , and newlines */
+        function vcardEscape(s) {
+            if (!s || !s.trim()) return '';
+            return String(s).trim().replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+        }
+
+        /** Build vCard 3.0 string for Android/iOS "Add Contact" compatibility */
+        function buildVcardString() {
+            const first = vcardEscape(document.getElementById('vcardFirstName').value);
+            const last = vcardEscape(document.getElementById('vcardLastName').value);
+            const org = vcardEscape(document.getElementById('vcardOrg').value);
+            const title = vcardEscape(document.getElementById('vcardTitle').value);
+            const tel = vcardEscape(document.getElementById('vcardTel').value);
+            const email = vcardEscape(document.getElementById('vcardEmail').value);
+            const url = vcardEscape(document.getElementById('vcardUrl').value);
+            const adr = vcardEscape(document.getElementById('vcardAddress').value);
+            const note = vcardEscape(document.getElementById('vcardNote').value);
+
+            const fn = [first, last].filter(Boolean).join(' ') || (first || last || 'Contact');
+            const n = [last, first, '', '', ''].join(';');
+
+            let v = 'BEGIN:VCARD\r\nVERSION:3.0\r\n';
+            v += 'N:' + n + '\r\n';
+            v += 'FN:' + fn + '\r\n';
+            if (org) v += 'ORG:' + org + '\r\n';
+            if (title) v += 'TITLE:' + title + '\r\n';
+            if (tel) v += 'TEL;TYPE=WORK,VOICE:' + tel + '\r\n';
+            if (email) v += 'EMAIL:' + email + '\r\n';
+            if (url) v += 'URL:' + url + '\r\n';
+            if (adr) v += 'ADR;TYPE=WORK:;;' + adr + ';;;;\r\n';
+            if (note) v += 'NOTE:' + note + '\r\n';
+            v += 'END:VCARD';
+            return v;
+        }
+
+        /** Build WiFi QR payload (Android/iOS compatible) */
+        function buildWifiString() {
+            const ssid = document.getElementById('wifiSsid').value.trim();
+            const pass = document.getElementById('wifiPassword').value;
+            const sec = document.getElementById('wifiSecurity').value;
+            const auth = sec === 'nopass' ? 'nopass' : sec;
+            let s = 'WIFI:T:' + auth + ';S:' + ssid + ';P:' + (sec === 'nopass' ? '' : pass) + ';;';
+            return s;
+        }
+
+        function generateQR() {
+            let text;
+            if (currentMode === 'vcard') {
+                const first = document.getElementById('vcardFirstName').value.trim();
+                const last = document.getElementById('vcardLastName').value.trim();
+                if (!first && !last) {
+                    alert(lang === 'tr' ? 'En az Ad veya Soyad girin.' : 'Please enter at least First or Last name.');
+                    return;
+                }
+                text = buildVcardString();
+            } else if (currentMode === 'wifi') {
+                const ssid = document.getElementById('wifiSsid').value.trim();
+                if (!ssid) {
+                    alert(lang === 'tr' ? 'Ağ adı (SSID) girin.' : 'Please enter network name (SSID).');
+                    return;
+                }
+                text = buildWifiString();
+            } else {
+                text = document.getElementById('qrText').value.trim();
+            }
+            if (!text) { alert(translations[lang].alertNoText); return; }
+
+            const unit = document.getElementById('sizeUnit').value;
+            const ratio = document.getElementById('aspectRatio').value;
+            const lvStr = document.getElementById('errorLevel').value;
+            const lvMap = { 'L': 1, 'M': 0, 'Q': 3, 'H': 2 };
+
+            let targetWidthPx, targetHeightPx, marginPx;
+            const DPI = 300;
+
+            if (unit === 'px') {
+                const baseSize = parseInt(document.getElementById('qrSize').value);
+                marginPx = parseInt(document.getElementById('pxMargin').value) || 0;
+                targetWidthPx = baseSize;
+                if (ratio === '1:1') targetHeightPx = baseSize;
+                else if (ratio === '4:3') targetHeightPx = Math.floor(baseSize * (3 / 4));
+                else if (ratio === '16:9') targetHeightPx = Math.floor(baseSize * (9 / 16));
+                else targetHeightPx = baseSize;
+            } else {
+                const w = parseFloat(document.getElementById('physWidth').value);
+                const h = parseFloat(document.getElementById('physHeight').value);
+                const m = parseFloat(document.getElementById('physMargin').value) || 0;
+                const factor = unit === 'cm' ? (DPI / 2.54) : DPI;
+                targetWidthPx = Math.floor(w * factor);
+                targetHeightPx = Math.floor(h * factor);
+                marginPx = Math.floor(m * factor);
+            }
+
+            try {
+                const qr = qrcode(0, lvMap[lvStr]);
+                qr.addData(text);
+                qr.make();
+
+                const dark = isInverted ? '#FFFFFF' : '#000000';
+                const light = isInverted ? '#000000' : '#FFFFFF';
+
+                const DPI = 300;
+                const SCREEN_DPI = 96; // Standard monitor DPI
+                // If unit is physical (cm/inch), scale to match real world. If px, keep 1:1.
+                const previewScale = (unit === 'cm' || unit === 'inch') ? (SCREEN_DPI / DPI) : 1.0;
+
+
+                // QR is square, fits in (smaller dimension - 2*margin)
+                const qrSizePx = Math.min(targetWidthPx, targetHeightPx) - (2 * marginPx);
+                const svg = qr.createSvg(10, 0, dark, light);
+
+                const container = document.getElementById('qrContainer');
+                container.innerHTML = svg;
+
+                // Scale preview to match physical size on 96 DPI screen
+                container.style.width = (targetWidthPx * previewScale) + 'px';
+                container.style.height = (targetHeightPx * previewScale) + 'px';
+                container.style.display = 'flex';
+                container.style.alignItems = 'center';
+                container.style.justifyContent = 'center';
+                container.style.background = light;
+                container.style.padding = (marginPx * previewScale) + 'px';
+
+                const svgEl = container.querySelector('svg');
+                svgEl.style.width = (qrSizePx * previewScale) + 'px';
+                svgEl.style.height = (qrSizePx * previewScale) + 'px';
+
+                const containerStyle = {
+                    width: container.style.width,
+                    height: container.style.height,
+                    display: container.style.display,
+                    alignItems: container.style.alignItems,
+                    justifyContent: container.style.justifyContent,
+                    background: container.style.background,
+                    padding: container.style.padding
+                };
+
+                prepareExportCustom(svg, targetWidthPx, targetHeightPx, qrSizePx, function () {
+                    if (currentMode === 'single' || currentMode === 'vcard' || currentMode === 'wifi') {
+                        const scoreEl = document.getElementById('scanScore');
+                        stateByMode[currentMode] = {
+                            svg: document.getElementById('qrContainer').innerHTML,
+                            containerStyle: containerStyle,
+                            dataUrl: document.getElementById('exportCanvas').toDataURL(),
+                            scoreClass: scoreEl.classList.contains('score-high') ? 'score-high' : scoreEl.classList.contains('score-medium') ? 'score-medium' : 'score-low',
+                            scoreHtml: scoreEl.innerHTML
+                        };
+                        generatedByMode[currentMode] = true;
+                    }
+                });
+                qrGenerated = true;
+                ['btnPng', 'btnJpeg', 'btnSvg', 'btnPdf', 'btnCopy', 'bulkExportBtn'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.disabled = false;
+                });
+                updateScore(text);
+                document.getElementById('vcardTip').classList.toggle('hidden', currentMode !== 'vcard');
+            } catch (e) { console.error(e); alert('Hata: ' + e.message); }
+        }
+
+        function prepareExportCustom(svg, w, h, qrSize, onReady) {
+            const canvas = document.getElementById('exportCanvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            img.onload = () => {
+                const light = isInverted ? '#000000' : '#FFFFFF';
+                ctx.fillStyle = light; ctx.fillRect(0, 0, w, h);
+                const x = (w - qrSize) / 2;
+                const y = (h - qrSize) / 2;
+                ctx.drawImage(img, x, y, qrSize, qrSize);
+                URL.revokeObjectURL(url);
+                if (typeof onReady === 'function') onReady();
+            };
+            img.src = url;
+        }
+
+        function updateScore(t) {
+            const el = document.getElementById('scanScore'); el.classList.remove('hidden');
+            if (t.length < 50) { el.className = 'score-badge score-high'; el.innerHTML = translations[lang].scoreHigh; }
+            else if (t.length < 150) { el.className = 'score-badge score-medium'; el.innerHTML = translations[lang].scoreMedium; }
+            else { el.className = 'score-badge score-low'; el.innerHTML = translations[lang].scoreLow; }
+        }
+
+        function getFN(t) { return (t || '').substring(0, 30).replace(/[^a-z0-9\u00C0-\u024F]/gi, '_') || 'qr'; }
+        function getExportBaseName() {
+            if (currentMode === 'vcard') {
+                const first = document.getElementById('vcardFirstName').value.trim();
+                const last = document.getElementById('vcardLastName').value.trim();
+                return getFN(first + '_' + last) || 'vcard';
+            }
+            if (currentMode === 'wifi') return getFN(document.getElementById('wifiSsid').value) || 'wifi';
+            return getFN(document.getElementById('qrText').value);
+        }
+        function exportPNG() { const c = document.getElementById('exportCanvas'), a = document.createElement('a'); a.download = getExportBaseName() + '.png'; a.href = c.toDataURL(); a.click(); }
+        function exportJPEG() { const c = document.getElementById('exportCanvas'), a = document.createElement('a'); a.download = getExportBaseName() + '.jpg'; a.href = c.toDataURL('image/jpeg', 0.9); a.click(); }
+        function exportSVG() { const b = new Blob([document.getElementById('qrContainer').innerHTML], { type: 'image/svg+xml' }); const a = document.createElement('a'); a.download = getExportBaseName() + '.svg'; a.href = URL.createObjectURL(b); a.click(); }
+        function exportPDF() {
+            const dataUrl = document.getElementById('exportCanvas').toDataURL();
+            const fileName = getExportBaseName() + '.pdf';
+            const win = window.open('', '_blank');
+            win.document.write(`
+                <html>
+                <head>
+                    <title>QR PDF Export</title>
+                    <style>
+                        body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #fff; }
+                        img { max-width: 80%; max-height: 80%; object-fit: contain; }
+                        @page { size: A4; margin: 0; }
+                        @media print { body { height: auto; } }
+                    </style>
+                </head>
+                <body onload="window.print(); window.close();">
+                    <img src="${dataUrl}">
+                </body>
+                </html>
+            `);
+            win.document.close();
+        }
+        async function copyToClipboard() { document.getElementById('exportCanvas').toBlob(async b => { await navigator.clipboard.write([new ClipboardItem({ 'image/png': b })]); alert('Kopyalandı!'); }); }
+        async function exportBulkZip() {
+            const lines = document.getElementById('bulkText').value.split('\n').filter(l => l.trim());
+            if (!lines.length) { alert(translations[lang].alertBulkNoText); return; }
+
+            const format = document.getElementById('bulkFormat').value; // png, jpg, svg
+            const btn = document.getElementById('bulkExportBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = translations[lang].btnZipping;
+
+            try {
+                const zipData = {};
+                for (let i = 0; i < lines.length; i++) {
+                    const text = lines[i].trim();
+                    document.getElementById('qrText').value = text;
+                    generateQR();
+
+                    // Wait for rendering to complete
+                    await new Promise(r => setTimeout(r, 150));
+
+                    let data, extension;
+                    if (format === 'svg') {
+                        const svgHtml = document.getElementById('qrContainer').innerHTML;
+                        data = new TextEncoder().encode(svgHtml);
+                        extension = '.svg';
+                    } else {
+                        const canvas = document.getElementById('exportCanvas');
+                        const mime = format === 'jpg' ? 'image/jpeg' : 'image/png';
+                        const blob = await new Promise(r => canvas.toBlob(r, mime, format === 'jpg' ? 0.9 : 1.0));
+                        data = new Uint8Array(await blob.arrayBuffer());
+                        extension = format === 'jpg' ? '.jpg' : '.png';
+                    }
+
+                    const fileName = getFN(text) + `_${i + 1}${extension}`;
+                    zipData[fileName] = data;
+                }
+
+                const zipped = fflate.zipSync(zipData);
+                const zipBlob = new Blob([zipped], { type: 'application/zip' });
+                const url = URL.createObjectURL(zipBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `QR_Paketi_${format.toUpperCase()}_${new Date().getTime()}.zip`;
+                a.click();
+                URL.revokeObjectURL(url);
+                alert(lines.length + translations[lang].successArchived);
+            } catch (e) {
+                console.error(e);
+                alert('Hata: ' + e.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+    </script>
+</body>
+
+</html>
